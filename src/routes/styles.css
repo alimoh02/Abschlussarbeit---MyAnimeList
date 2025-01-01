@@ -1,0 +1,86 @@
+/* Allgemeines Styling */
+body {
+  background-color: #1b1d1c; /* Dunkler Hintergrund */
+  color: #e0ffe0; /* Helles Grün für den Text */
+  font-family: 'Roboto', sans-serif; /* Moderne Schriftart */
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #1e4620; /* Dunkles Grün für die Navbar */
+  padding: 1rem 2rem;
+  border-bottom: 3px solid #2a9d58; /* Helles Grün als Akzent */
+}
+
+/* Navbar Container */
+.navbar-container {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Stellt sicher, dass Titel und Links in einer Zeile sind */
+}
+
+/* Titel der Navbar */
+.navbar-brand {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e0ffe0; /* Helles Grün für den Titel */
+  text-decoration: none;
+  margin-right: 5rem; /* Abstand zwischen Titel und Links */
+}
+
+/* Hover-Effekt für den Titel */
+.navbar-brand:hover {
+  color: #8afaa8; /* Hellgrüner Effekt beim Hover */
+}
+
+/* Navigation weiter nach links verschoben */
+.navbar-links {
+  display: flex;
+  gap: 2rem; /* Abstand zwischen den Links */
+  margin-left: 5rem; /* Zusätzlicher Abstand, um die Links nach links zu verschieben */
+}
+
+/* Links in der Navbar */
+.nav-link {
+  font-size: 1.2rem;
+  color: #e0ffe0; /* Helles Grün für die Links */
+  text-decoration: none;
+  transition: color 0.3s ease; /* Weicher Übergang beim Hover */
+}
+
+/* Hover-Effekt für Links */
+.nav-link:hover {
+  color: #8afaa8; /* Hellgrün beim Hover */
+}
+
+/* Container für den Seiteninhalt */
+.container {
+  max-width: 1200px;
+  margin: 2rem auto 0; /* Abstand nach oben */
+  padding: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar-links {
+    margin-left: 0; /* Keine zusätzliche Verschiebung bei kleinen Bildschirmen */
+    margin-top: 1rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+  }
+}

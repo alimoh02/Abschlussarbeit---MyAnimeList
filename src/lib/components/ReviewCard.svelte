@@ -1,41 +1,34 @@
 <script>
-    export let review; // Daten der Review aus der API
-  </script>
-  
-  <div class="review-card">
-    <div class="details">
+  export let review;
+</script>
+
+<div class="review-card">
+  <div class="details">
       <div class="title">
-        <a href={review.link} target="_blank">Review von {review.profile}</a>
+          <a href={review.link} target="_blank">Review von {review.profile}</a>
       </div>
-      <div>
-        Anime UID: {review.anime_uid}
-      </div>
-      <div>
-        Bewertung: {review.score}
-      </div>
-      <div>
-        Text: {review.text}
-      </div>
-    </div>
+      <div>Anime UID: {review.anime_uid}</div>
+      <div>Bewertung: {review.score}</div>
+      <div>Text: {review.text}</div>
   </div>
-  
-  <style>
-    .review-card {
+</div>
+
+<style>
+  .review-card {
       border: 1px solid #555;
-      height: 100%;
       background-color: #1abc9c;
       color: white;
       border-radius: 8px;
-      overflow: hidden;
       padding: 1em;
-    }
-    .details {
+  }
+
+  .details {
       padding: 0.5em;
-    }
-    .title {
+  }
+
+  .title {
       font-weight: bold;
       font-size: 1.2em;
       margin-bottom: 0.5em;
-    }
-  </style>
-  
+  }
+</style>

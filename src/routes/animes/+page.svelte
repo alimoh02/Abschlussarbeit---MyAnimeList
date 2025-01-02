@@ -1,22 +1,21 @@
 <script>
-    import AnimeCard from "$lib/components/AnimeCard.svelte"; // Deine Komponente für die Darstellung eines Animes
-    let { data } = $props();
-  </script>
-  
-  <p><i>Daten und Bilder bereitgestellt durch MyAnimeList.com (also durch mienen ausgewählten Datensatz).</i></p>
-  
-  <div class="anime-grid">
-    {#each data.animes as anime}
+  import AnimeCard from "$lib/components/AnimeCard.svelte";
+  let { data } = $props();
+</script>
+
+<p><i>Daten und Bilder bereitgestellt durch MyAnimeList.com (basierend auf deinem Datensatz).</i></p>
+
+<div class="anime-grid">
+  {#each data.animes as anime}
       <AnimeCard {anime}></AnimeCard>
-    {/each}
-  </div>
-  
-  <style>
-    .anime-grid {
+  {/each}
+</div>
+
+<style>
+  .anime-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 3 Karten nebeneinander bei Platz, sonst flexibel */
-      gap: 1.5rem; /* Abstand zwischen den Karten */
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
       margin-top: 2rem;
-    }
-  </style>
-  
+  }
+</style>

@@ -3,7 +3,7 @@
     let { data } = $props();
   </script>
   
-  <p><i>Daten und Bilder bereitgestellt durch MyAnimeList.com (basierend auf meinen Datensatz).</i></p>
+  <p><i>Animes von MyAnimeList.com</i></p>
   
   <div class="anime-grid">
     {#each data.animes as anime}

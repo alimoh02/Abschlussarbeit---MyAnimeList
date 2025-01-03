@@ -8,7 +8,7 @@ export async function load() {
     };
   } catch (error) {
     console.error("Fehler beim Laden der Reviews:", error.message);
-    return { reviews: [] }; // Gibt eine leere Liste zurück, falls ein Fehler auftritt
+    return { reviews: [] };
   }
 }
 

@@ -7,8 +7,8 @@
 
 <div class="review-grid">
   {#each data.reviews as review}
-    <div class="col-sm-6 col-md-4 col-lg-3 mb-2 gx-2">
-      <ReviewCard {review} />
+    <div class="review-wrapper">
+      <ReviewCard {review}></ReviewCard>
     </div>
   {:else}
     <p>Keine Reviews verfügbar.</p>
@@ -19,7 +19,11 @@
   .review-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
+    gap: 1.5rem; /* Horizontaler Abstand */
     margin-top: 2rem;
+  }
+
+  .review-wrapper {
+    margin-bottom: 1.5rem; /* Vertikaler Abstand zwischen den Karten */
   }
 </style>

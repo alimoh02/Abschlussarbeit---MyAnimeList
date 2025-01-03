@@ -1,53 +1,42 @@
-import { MongoClient, ObjectId } from "mongodb"; // See https://www.mongodb.com/docs/drivers/node/current/quick-start/
+import { MongoClient, ObjectId } from "mongodb";
 import { DB_URI } from "$env/static/private";
 
 const client = new MongoClient(DB_URI);
 
 await client.connect();
-const db = client.db("MyAnimeList"); // Select your database
+const db = client.db("MyAnimeList");
 
 //////////////////////////////////////////
 // Animes
 //////////////////////////////////////////
 
-// Get all animes
-async function getAnimes() {
+// Get a limited number of animes
+async function getAnimes(limit = 200) {
   let animes = [];
   try {
     const collection = db.collection("animes");
-
-    // Specify a query/filter if needed
-    const query = {};
-
-    // Get all objects that match the query
-    animes = await collection.find(query).toArray();
+    animes = await collection.find({}).limit(limit).toArray();
     animes.forEach((anime) => {
-      anime._id = anime._id.toString(); // Convert ObjectId to String
+      anime._id = anime._id.toString();
     });
   } catch (error) {
-    console.log(error);
-    // TODO: error handling
+    console.error(error);
   }
   return animes;
 }
 
-// Get anime by id
+// Get anime by ID
 async function getAnime(id) {
   let anime = null;
   try {
     const collection = db.collection("animes");
-    const query = { _id: new ObjectId(id) }; // Filter by id
+    const query = { _id: new ObjectId(id) };
     anime = await collection.findOne(query);
-
-    if (!anime) {
-      console.log("No anime with id " + id);
-      // TODO: error handling
-    } else {
-      anime._id = anime._id.toString(); // Convert ObjectId to String
+    if (anime) {
+      anime._id = anime._id.toString();
     }
   } catch (error) {
-    // TODO: error handling
-    console.log(error.message);
+    console.error(error.message);
   }
   return anime;
 }
@@ -56,120 +45,79 @@ async function getAnime(id) {
 // Reviews
 //////////////////////////////////////////
 
-// Get all reviews
-async function getReviews() {
+// Get a limited number of reviews
+async function getReviews(limit = 200) {
   let reviews = [];
   try {
     const collection = db.collection("reviews");
-
-    // Specify a query/filter if needed
-    const query = {};
-
-    // Get all objects that match the query
-    reviews = await collection.find(query).toArray();
+    reviews = await collection.find({}).limit(limit).toArray();
     reviews.forEach((review) => {
-      review._id = review._id.toString(); // Convert ObjectId to String
+      review._id = review._id.toString();
     });
   } catch (error) {
-    console.log(error);
-    // TODO: error handling
+    console.error(error);
   }
   return reviews;
 }
 
-// Create review
+// Create a review
 async function createReview(review) {
   try {
     const collection = db.collection("reviews");
     const result = await collection.insertOne(review);
-    return result.insertedId.toString(); // Convert ObjectId to String
+    return result.insertedId.toString();
   } catch (error) {
-    // TODO: error handling
-    console.log(error.message);
+    console.error(error.message);
   }
   return null;
 }
 
-// Delete review by id
+// Delete a review by ID
 async function deleteReview(id) {
   try {
     const collection = db.collection("reviews");
-    const query = { _id: new ObjectId(id) }; // Filter by id
+    const query = { _id: new ObjectId(id) };
     const result = await collection.deleteOne(query);
-
     if (result.deletedCount === 0) {
-      console.log("No review with id " + id);
+      console.log(`No review with id ${id}`);
     } else {
-      console.log("Review with id " + id + " has been successfully deleted.");
-      return id;
+      console.log(`Review with id ${id} has been deleted.`);
     }
   } catch (error) {
-    // TODO: error handling
-    console.log(error.message);
+    console.error(error.message);
   }
-  return null;
 }
 
 //////////////////////////////////////////
 // Profiles
 //////////////////////////////////////////
 
-// Get all profiles
-async function getProfiles() {
+// Get a limited number of profiles
+async function getProfiles(limit = 200) {
   let profiles = [];
   try {
     const collection = db.collection("profiles");
-
-    // Specify a query/filter if needed
-    const query = {};
-
-    // Get all objects that match the query
-    profiles = await collection.find(query).toArray();
+    profiles = await collection.find({}).limit(limit).toArray();
     profiles.forEach((profile) => {
-      profile._id = profile._id.toString(); // Convert ObjectId to String
+      profile._id = profile._id.toString();
     });
   } catch (error) {
-    console.log(error);
-    // TODO: error handling
+    console.error(error);
   }
   return profiles;
 }
 
-// Create profile
+// Create a profile
 async function createProfile(profile) {
   try {
     const collection = db.collection("profiles");
     const result = await collection.insertOne(profile);
-    return result.insertedId.toString(); // Convert ObjectId to String
+    return result.insertedId.toString();
   } catch (error) {
-    // TODO: error handling
-    console.log(error.message);
+    console.error(error.message);
   }
-  return null;
 }
 
-// Get profile by id
-async function getProfile(id) {
-  let profile = null;
-  try {
-    const collection = db.collection("profiles");
-    const query = { _id: new ObjectId(id) }; // Filter by id
-    profile = await collection.findOne(query);
-
-    if (!profile) {
-      console.log("No profile with id " + id);
-      // TODO: error handling
-    } else {
-      profile._id = profile._id.toString(); // Convert ObjectId to String
-    }
-  } catch (error) {
-    // TODO: error handling
-    console.log(error.message);
-  }
-  return profile;
-}
-
-// Export all functions so that they can be used in other files
 export default {
   getAnimes,
   getAnime,
@@ -178,5 +126,4 @@ export default {
   deleteReview,
   getProfiles,
   createProfile,
-  getProfile,
 };

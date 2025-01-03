@@ -1,7 +1,7 @@
 import db from "$lib/db.js";
 
 export async function load() {
-    return {
-        animes: await db.getAnimes(),
-    };
+  return {
+    animes: await db.getAnimes(200), // Limitiert auf 200 Animes
+  };
 }

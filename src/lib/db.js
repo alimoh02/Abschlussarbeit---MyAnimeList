@@ -1,10 +1,10 @@
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb"; // See https://www.mongodb.com/docs/drivers/node/current/quick-start/
 import { DB_URI } from "$env/static/private";
 
 const client = new MongoClient(DB_URI);
 
 await client.connect();
-const db = client.db("MyAnimeList");
+const db = client.db("MyAnimeList"); // Select your database
 
 //////////////////////////////////////////
 // Animes
@@ -15,7 +15,10 @@ async function getAnimes(limit = 200) {
   let animes = [];
   try {
     const collection = db.collection("animes");
-    animes = await collection.find({}).limit(limit).toArray();
+    animes = await collection
+      .find({}, { projection: { title: 1, genre: 1, episodes: 1, score: 1, img_url: 1, uid: 1 } })
+      .limit(limit)
+      .toArray();
     animes.forEach((anime) => {
       anime._id = anime._id.toString();
     });
@@ -39,6 +42,44 @@ async function getAnime(id) {
     console.error(error.message);
   }
   return anime;
+}
+
+//////////////////////////////////////////
+// Mangas
+//////////////////////////////////////////
+
+// Get a limited number of mangas
+async function getMangas(limit = 200) {
+  let mangas = [];
+  try {
+    const collection = db.collection("mangas");
+    mangas = await collection
+      .find({}, { projection: { title: 1, genres: 1, score: 1, members: 1, main_picture: 1 } })
+      .limit(limit)
+      .toArray();
+    mangas.forEach((manga) => {
+      manga._id = manga._id.toString();
+    });
+  } catch (error) {
+    console.error(error);
+  }
+  return mangas;
+}
+
+// Get manga by ID
+async function getManga(id) {
+  let manga = null;
+  try {
+    const collection = db.collection("mangas");
+    const query = { _id: new ObjectId(id) };
+    manga = await collection.findOne(query);
+    if (manga) {
+      manga._id = manga._id.toString();
+    }
+  } catch (error) {
+    console.error(error.message);
+  }
+  return manga;
 }
 
 //////////////////////////////////////////
@@ -121,6 +162,8 @@ async function createProfile(profile) {
 export default {
   getAnimes,
   getAnime,
+  getMangas,
+  getManga,
   getReviews,
   createReview,
   deleteReview,

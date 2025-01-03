@@ -2,7 +2,7 @@ import db from "$lib/db.js";
 
 export async function load() {
   return {
-    reviews: await db.getReviews(200), // Limitiert auf 200 Reviews
+    reviews: await db.getReviews(15), // Limitiert auf 15 Reviews
   };
 }
 

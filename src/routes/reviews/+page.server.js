@@ -2,7 +2,7 @@ import db from "$lib/db.js";
 
 export async function load() {
     try {
-        const reviews = await db.getReviews(100); // Limitiere auf 100 Reviews
+        const reviews = await db.getReviews(50); // Limitiere auf 50 Reviews
         return { reviews };
     } catch (error) {
         console.error("Fehler beim Laden der Reviews:", error.message);

@@ -31,8 +31,8 @@
 
     <label for="sortOrder">Reihenfolge</label>
     <select id="sortOrder" name="sortOrder" onchange={handleSortChange}>
-      <option value="asc" selected={data.sortOrder === "asc"}>Aufsteigend</option>
-      <option value="desc" selected={data.sortOrder === "desc"}>Absteigend</option>
+      <option value="asc" selected={data.sortOrder == 1}>Aufsteigend</option>
+      <option value="desc" selected={data.sortOrder == -1}>Absteigend</option>
     </select>
   </div>
 </div>

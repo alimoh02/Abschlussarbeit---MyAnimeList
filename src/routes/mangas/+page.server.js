@@ -1,10 +1,10 @@
 import db from "$lib/db.js";
 
 export async function load({ url }) {
-  const sortField = url.searchParams.get("sortField") || "title";
-  const sortOrder = url.searchParams.get("sortOrder") === "desc" ? -1 : 1;
+  const sortField = url.searchParams.get("sortField") || "title"; // Standard-Sortierfeld
+  const sortOrder = url.searchParams.get("sortOrder") === "desc" ? -1 : 1; // Standard: Aufsteigend
 
-  const mangas = await db.getMangas(100); // 100 Mangas laden (limitiert)
+  const mangas = await db.getMangas(100); // Limitiert auf 100 Mangas
   mangas.sort((a, b) => {
     if (a[sortField] < b[sortField]) return -1 * sortOrder;
     if (a[sortField] > b[sortField]) return 1 * sortOrder;
@@ -14,6 +14,6 @@ export async function load({ url }) {
   return {
     mangas,
     sortField,
-    sortOrder,
+    sortOrder, // Übergebe die Sortierkriterien an das Frontend
   };
 }

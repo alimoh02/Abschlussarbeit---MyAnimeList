@@ -9,7 +9,11 @@
     alt={profile.profile || "Profile Image"}
   />
   <div class="details">
-    <h5 class="title">{profile.profile || "Unbekannt"}</h5>
+    <h5 class="title">
+      <a href={profile.link || "#"} target="_blank" rel="noopener noreferrer" style="color: white;">
+        {profile.profile || "Unbekannt"}
+      </a>
+    </h5>
     <p class="info">Geschlecht: {profile.gender || "Nicht angegeben"}</p>
     <p class="info">Geburtsdatum: {profile.birthday || "Nicht angegeben"}</p>
     <form method="POST" action="?/delete" class="delete-form">

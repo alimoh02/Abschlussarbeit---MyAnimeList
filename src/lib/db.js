@@ -98,6 +98,17 @@ async function getReviews(limit = 200) {
       .limit(limit)
       .toArray();
 
+    // Duplikate anhand einer Kombination von Feldern entfernen (z. B. anime_uid + profile)
+    const seen = new Set();
+    reviews = reviews.filter((review) => {
+      const uniqueKey = `${review.anime_uid}-${review.profile}`;
+      if (seen.has(uniqueKey)) {
+        return false;
+      }
+      seen.add(uniqueKey);
+      return true;
+    });
+
     reviews.forEach((review) => {
       review._id = review._id.toString();
     });
@@ -106,6 +117,7 @@ async function getReviews(limit = 200) {
   }
   return reviews;
 }
+
 
 async function createReview(review) {
   try {
